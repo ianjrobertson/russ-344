@@ -50,9 +50,6 @@ export default function ZoomableCanvas({
               height: `${canvasConfig.height}px`,
             }}
           >
-            {/* Dark overlay representing "Wall of Silence" */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 opacity-95" />
-
             {/* Archive items */}
             <div className="relative z-10">
               {children}

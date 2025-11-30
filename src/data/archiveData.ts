@@ -103,5 +103,5 @@ export const canvasConfig = {
   height: 3000,
   minScale: 0.3,
   maxScale: 3,
-  initialScale: 0.5,
+  initialScale: .20,
 };
