@@ -70,9 +70,9 @@ export const archiveItems: ArchiveItem[] = [
     height: 450,
   },
   {
-    id: 'family-photo-1',
+    id: 'barge-haulers',
     type: 'photo',
-    position: { x: 1500, y: 2000 },
+    position: { x: 1750, y: 1750 },
     censoredSrc: 'assets/paintings/bargehaulers-censored.png',
     uncensoredSrc: 'assets/paintings/bargehaulers.jpg',
     title: '',
@@ -82,7 +82,7 @@ export const archiveItems: ArchiveItem[] = [
     height: 300,
   },
   {
-    id: 'kremlin-photo-1',
+    id: 'women',
     type: 'photo',
     position: { x: 3200, y: 400 },
     censoredSrc: 'assets/paintings/women-censored.png',
@@ -149,7 +149,7 @@ export const archiveItems: ArchiveItem[] = [
 export const canvasConfig = {
   width: 4000,
   height: 3000,
-  minScale: 0.3,
+  minScale: 0.2,
   maxScale: 3,
-  initialScale: .20,
+  initialScale: .2,
 };
