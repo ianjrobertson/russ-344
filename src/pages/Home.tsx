@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import ZoomableCanvas from "../components/Canvas/ZoomableCanvas";
 import PhotoReveal from "../components/RevealItems/PhotoReveal";
 import ZoomableTextBox from "../components/ZoomableTextBox/ZoomableTextBox";
@@ -11,6 +12,8 @@ Duis gravida faucibus venenatis. Aenean eu auctor urna. Cras aliquet leo eu mass
 
 
 export default function Home() {
+    const navigate = useNavigate();
+
     // Text box position and dimensions
     const textBoxPos = { x: 1500, y: 750 };
     const textBoxSize = { width: 1000, height: 1500 };
@@ -21,8 +24,18 @@ export default function Home() {
       y: textBoxPos.y + textBoxSize.height / 2
     };
 
+    const handleNavigateToGallery = () => {
+      navigate('/russ-344/gallery');
+    };
+
     return (
-        <ZoomableCanvas config={canvasConfig} centerPoint={centerPoint}>
+        <ZoomableCanvas
+          config={canvasConfig}
+          centerPoint={centerPoint}
+          showGalleryButton={true}
+          showResetButton={true}
+          onNavigateToGallery={handleNavigateToGallery}
+        >
         {archiveItems.map(item => (
           <PhotoReveal
             key={item.id}
