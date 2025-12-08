@@ -4,7 +4,10 @@ import { canvasConfig, galleryItems } from "../data/galleryData";
 
 export default function Gallery() {
     return (
-        <ZoomableCanvas config={canvasConfig}>
+        <ZoomableCanvas 
+            config={canvasConfig}
+            showResetButton={true}
+        >
             {galleryItems.map(item => (
                 <PhotoReveal
                     key={item.id}
