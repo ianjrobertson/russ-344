@@ -1,9 +1,7 @@
-import { useState } from "react";
 import ZoomableCanvas from "../components/Canvas/ZoomableCanvas";
 import PhotoReveal from "../components/RevealItems/PhotoReveal";
 import ZoomableTextBox from "../components/ZoomableTextBox/ZoomableTextBox";
 import { canvasConfig, archiveItems } from "../data/archiveData";
-import type { RevealState } from "../types";
 
 const projectDescription = ` Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sodales aliquet egestas. Vivamus luctus, lacus eget ornare bibendum, lorem lacus venenatis lorem, id fringilla lectus est eget nisl. Sed vitae ipsum ante. In dapibus, neque eget porttitor fermentum, dui orci pretium magna, dapibus convallis ex felis eget justo. Sed volutpat lorem nec dui tempor ullamcorper. Suspendisse fermentum feugiat nibh, in faucibus diam auctor finibus. Nulla ante lorem, tincidunt vel molestie eu, dapibus ultricies diam. Aliquam eu tempor ex, sit amet suscipit ex. Vestibulum vel tellus eros. Suspendisse urna mauris, placerat ac egestas ac, pretium et nulla.
 
@@ -13,22 +11,12 @@ Duis gravida faucibus venenatis. Aenean eu auctor urna. Cras aliquet leo eu mass
 
 
 export default function Home() {
-    const [revealedItems, setRevealedItems] = useState<RevealState>({});
-
-    const handleReveal = (itemId: string, isRevealed: boolean) => {
-        setRevealedItems(prev => ({
-        ...prev,
-        [itemId]: isRevealed
-        }));
-    };
-
     return (
         <ZoomableCanvas config={canvasConfig}>
         {archiveItems.map(item => (
           <PhotoReveal
             key={item.id}
             item={item}
-            onReveal={handleReveal}
           />
         ))}
         <ZoomableTextBox

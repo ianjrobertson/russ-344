@@ -8,7 +8,7 @@ import type { ArchiveItem } from '../types';
  * - Manipulated paintings
  * - Censored media files
  */
-export const archiveItems: ArchiveItem[] = [
+export const galleryItems: ArchiveItem[] = [
   {
     id: 'trotsky-erasure-1',
     type: 'painting',
