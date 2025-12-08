@@ -11,8 +11,18 @@ Duis gravida faucibus venenatis. Aenean eu auctor urna. Cras aliquet leo eu mass
 
 
 export default function Home() {
+    // Text box position and dimensions
+    const textBoxPos = { x: 1500, y: 750 };
+    const textBoxSize = { width: 1000, height: 1500 };
+
+    // Calculate center point of the text box
+    const centerPoint = {
+      x: textBoxPos.x + textBoxSize.width / 2,
+      y: textBoxPos.y + textBoxSize.height / 2
+    };
+
     return (
-        <ZoomableCanvas config={canvasConfig}>
+        <ZoomableCanvas config={canvasConfig} centerPoint={centerPoint}>
         {archiveItems.map(item => (
           <PhotoReveal
             key={item.id}
@@ -22,9 +32,9 @@ export default function Home() {
         <ZoomableTextBox
           title="Russian Censorship"
           content={projectDescription}
-          position={{ x: -750, y: -200 }}
-          width={1000}
-          height={1500}
+          position={textBoxPos}
+          width={textBoxSize.width}
+          height={textBoxSize.height}
         />
       </ZoomableCanvas>
     )
