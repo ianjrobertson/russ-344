@@ -1,18 +1,21 @@
 import type { ArchiveItem } from '../types';
 
 /**
- * Sample archive data for The Veiled Archive
- *
- * In production, replace placeholder images with:
- * - Historical Soviet photos (censored/uncensored pairs)
- * - Manipulated paintings
- * - Censored media files
+ * Configuration for automatic gallery layout
  */
-export const galleryItems: ArchiveItem[] = [
+const LAYOUT_CONFIG = {
+  startX: 200,           // Starting X position
+  startY: 1500,          // Y position (centers items vertically in canvas)
+  spacingX: 200,         // Horizontal spacing between items
+};
+
+/**
+ * Base gallery items without positions (positions will be calculated)
+ */
+const baseGalleryItems: Omit<ArchiveItem, 'position'>[] = [
   {
     id: 'trotsky-erasure-1',
     type: 'painting',
-    position: { x: 1200, y: 800 },
     censoredSrc: 'assets/paintings/marie.png',
     uncensoredSrc: 'assets/paintings/marie.jpg',
     title: '',
@@ -24,7 +27,6 @@ export const galleryItems: ArchiveItem[] = [
   {
     id: 'barge-haulers',
     type: 'painting',
-    position: { x: 1750, y: 1750 },
     censoredSrc: 'assets/paintings/bargehaulers-censored.png',
     uncensoredSrc: 'assets/paintings/bargehaulers.jpg',
     title: '',
@@ -36,7 +38,6 @@ export const galleryItems: ArchiveItem[] = [
   {
     id: 'women',
     type: 'painting',
-    position: { x: 3200, y: 400 },
     censoredSrc: 'assets/paintings/women-censored.png',
     uncensoredSrc: 'assets/paintings/women.jpg',
     title: '',
@@ -48,7 +49,6 @@ export const galleryItems: ArchiveItem[] = [
   {
     id: 'kremlin-photo-1',
     type: 'painting',
-    position: { x: 100, y: 800 },
     censoredSrc: 'assets/paintings/return.png',
     uncensoredSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Ilya_Repin_Unexpected_visitors.jpg/1200px-Ilya_Repin_Unexpected_visitors.jpg',
     title: '',
@@ -60,7 +60,6 @@ export const galleryItems: ArchiveItem[] = [
   {
     id: 'apprentice',
     type: 'painting',
-    position: { x: -1000, y: 600},
     censoredSrc: 'assets/paintings/apprentice-censored.png',
     uncensoredSrc: 'assets/paintings/apprentice.jpg',
     title: '',
@@ -70,6 +69,34 @@ export const galleryItems: ArchiveItem[] = [
     height: 400,
   },
 ];
+
+/**
+ * Automatically positions gallery items in a horizontal line
+ */
+function positionGalleryItems(items: Omit<ArchiveItem, 'position'>[]): ArchiveItem[] {
+  let currentX = LAYOUT_CONFIG.startX;
+
+  return items.map((item) => {
+    const itemWidth = item.width || 400; // Default width if not specified
+    const position = {
+      x: currentX,
+      y: LAYOUT_CONFIG.startY,
+    };
+
+    // Move X position for next item (current item width + spacing)
+    currentX += itemWidth + LAYOUT_CONFIG.spacingX;
+
+    return {
+      ...item,
+      position,
+    };
+  });
+}
+
+/**
+ * Gallery items with auto-calculated positions
+ */
+export const galleryItems: ArchiveItem[] = positionGalleryItems(baseGalleryItems);
 
 /**
  * Canvas configuration for the archive
