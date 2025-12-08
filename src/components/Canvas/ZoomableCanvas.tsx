@@ -75,7 +75,16 @@ export default function ZoomableCanvas({
   };
 
   return (
-    <div ref={containerRef} className="w-full h-screen bg-slate-50 overflow-hidden relative">
+    <div
+      ref={containerRef}
+      className="w-full h-screen bg-slate-50 overflow-hidden relative"
+      style={canvasConfig.backgroundImage ? {
+        backgroundImage: `url(${canvasConfig.backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      } : undefined}
+    >
       <TransformWrapper
         ref={transformRef}
         initialScale={mobileScale}

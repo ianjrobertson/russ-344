@@ -80,4 +80,5 @@ export const canvasConfig = {
   minScale: 0.2,
   maxScale: 3,
   initialScale: .2,
+  backgroundImage: 'assets/media/gallery-background-3.jpg', // Add your background image path here
 };

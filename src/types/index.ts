@@ -32,4 +32,5 @@ export interface CanvasConfig {
   minScale: number;
   maxScale: number;
   initialScale?: number;
+  backgroundImage?: string;
 }
