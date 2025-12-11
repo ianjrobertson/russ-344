@@ -3,15 +3,17 @@ import { useState, useEffect, useRef } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import type {ReactZoomPanPinchRef} from 'react-zoom-pan-pinch'
 import type { CanvasConfig } from '../../types';
-import { MoveRight } from 'lucide-react';
+import { MoveRight, MoveLeft } from 'lucide-react';
 
 interface ZoomableCanvasProps {
   children: ReactNode;
   config?: CanvasConfig;
   centerPoint?: { x: number; y: number }; // Point to center the view on
   showGalleryButton?: boolean;
+  showHomeButton?: boolean;
   showResetButton?: boolean;
   onNavigateToGallery?: () => void;
+  onNavigateToHome?: () => void;
 }
 
 const defaultConfig: CanvasConfig = {
@@ -27,8 +29,10 @@ export default function ZoomableCanvas({
   config = defaultConfig,
   centerPoint,
   showGalleryButton = false,
+  showHomeButton = false,
   showResetButton = false,
-  onNavigateToGallery
+  onNavigateToGallery,
+  onNavigateToHome
 }: ZoomableCanvasProps) {
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -119,11 +123,11 @@ export default function ZoomableCanvas({
 
       {/* Bottom navigation buttons */}
       <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center pointer-events-none z-50">
-        {/* Gallery button - bottom left */}
+        {/* Reset button - bottom left */}
         {showResetButton && (
           <button
             onClick={handleReset}
-            className="pointer-events-auto px-4 py-2 md:px-6 md:py-3 bg-slate-800/90 hover:bg-slate-700/90 text-white rounded-lg md:rounded-xl shadow-lg md:shadow-xl backdrop-blur-sm border border-slate-600 hover:border-slate-500 transition-all duration-200 text-sm md:text-base font-medium active:scale-95"
+            className="pointer-events-auto px-4 py-2 md:px-6 md:py-3 bg-slate-800/90 hover:bg-slate-700/90 text-white rounded-lg md:rounded-xl shadow-lg md:shadow-xl backdrop-blur-sm border border-slate-600 hover:border-slate-500 transition-all duration-200 text-sm md:text-base font-medium active:scale-95 min-h-11 min-w-11"
           >
             Reset View
           </button>
@@ -131,13 +135,25 @@ export default function ZoomableCanvas({
 
         <div className="flex-1" />
 
-        {/* Reset button - bottom right */}
+        {/* Home button - bottom right */}
+        {showHomeButton && (
+          <button
+            onClick={onNavigateToHome}
+            className="pointer-events-auto px-4 py-2 md:px-6 md:py-3 bg-slate-800/90 hover:bg-slate-700/90 text-white rounded-lg md:rounded-xl shadow-lg md:shadow-xl backdrop-blur-sm border border-slate-600 hover:border-slate-500 transition-all duration-200 text-sm md:text-base font-medium active:scale-95 flex items-center justify-center gap-2 min-h-11 min-w-11"
+          >
+            <MoveLeft size={18} className="md:w-5 md:h-5" />
+            <span className="hidden sm:inline">Home</span>
+          </button>
+        )}
+
+        {/* Gallery button - bottom right */}
         {showGalleryButton && (
           <button
             onClick={onNavigateToGallery}
-            className="pointer-events-auto px-4 py-2 md:px-6 md:py-3 bg-slate-800/90 hover:bg-slate-700/90 text-white rounded-lg md:rounded-xl shadow-lg md:shadow-xl backdrop-blur-sm border border-slate-600 hover:border-slate-500 transition-all duration-200 text-sm md:text-base font-medium active:scale-95 flex"
+            className="pointer-events-auto px-4 py-2 md:px-6 md:py-3 bg-slate-800/90 hover:bg-slate-700/90 text-white rounded-lg md:rounded-xl shadow-lg md:shadow-xl backdrop-blur-sm border border-slate-600 hover:border-slate-500 transition-all duration-200 text-sm md:text-base font-medium active:scale-95 flex items-center justify-center gap-2 min-h-11 min-w-11"
           >
-            Gallery <MoveRight />
+            <span className="hidden sm:inline">Gallery</span>
+            <MoveRight size={18} className="md:w-5 md:h-5" />
           </button>
         )}
       </div>
