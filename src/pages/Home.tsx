@@ -43,7 +43,7 @@ export default function Home() {
           />
         ))}
         <ZoomableTextBox
-          title="Russian Censorship"
+          title="Soviet Censorship"
           content={projectDescription}
           position={textBoxPos}
           width={textBoxSize.width}
