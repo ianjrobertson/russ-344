@@ -38,7 +38,7 @@ const baseGalleryItems: Omit<ArchiveItem, 'position'>[] = [
   {
     id: 'women',
     type: 'painting',
-    censoredSrc: 'assets/paintings/women-censored.png',
+    censoredSrc: 'assets/paintings/woman-ai.png',
     uncensoredSrc: 'assets/paintings/women.jpg',
     title: '',
     description: '',
@@ -60,13 +60,63 @@ const baseGalleryItems: Omit<ArchiveItem, 'position'>[] = [
   {
     id: 'apprentice',
     type: 'painting',
-    censoredSrc: 'assets/paintings/apprentice-censored.png',
+    censoredSrc: 'assets/paintings/apprentice-ai.png',
     uncensoredSrc: 'assets/paintings/apprentice.jpg',
     title: '',
     description: '',
     historicalContext: '',
     width: 600,
     height: 400,
+  },
+  {
+    id: 'chicken',
+    type: 'painting',
+    censoredSrc: 'assets/paintings/chagall-chicken-ai.png',
+    uncensoredSrc: 'assets/paintings/puzzle-michele-wilson-jigsaw-puzzle-250-pieces-art-wooden-chagall-the-bridal-pair-with-the-eiffel-tower.4590-1.fs_.webp',
+    title: '',
+    description: '',
+    width: 500,
+    height: 600,
+  }, 
+  {
+    id: 'horse',
+    type:'painting',
+    censoredSrc: 'assets/paintings/red-horse-ai.png',
+    uncensoredSrc: 'assets/paintings/red-horse.JPG',
+    title: '',
+    description: '',
+    width: 700,
+    height: 650
+  },
+  {
+    id: 'ivan',
+    type: 'painting',
+    censoredSrc: 'assets/paintings/ivan-ai.png',
+    uncensoredSrc: 'assets/paintings/ivan.avif',
+    title: '',
+    description: '',
+    width: 500,
+    height: 500
+  },
+  {
+    id: 'knight',
+    type: 'painting',
+    censoredSrc: 'assets/paintings/knight-ai.png',
+    uncensoredSrc: 'assets/paintings/knight.jpg',
+    title: '',
+    description: '',
+    width: 700,
+    height: 500
+  },
+  {
+    id: 'dudes',
+    type: 'painting',
+    censoredSrc: 'assets/paintings/dudes-ai.png',
+    uncensoredSrc: 'assets/paintings/dudes.jpg',
+    title: '',
+    description: '',
+    width: 700,
+    height: 500
   },
 ];
 
