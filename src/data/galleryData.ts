@@ -5,8 +5,11 @@ import type { ArchiveItem } from '../types';
  */
 const LAYOUT_CONFIG = {
   startX: 200,           // Starting X position
-  startY: 1500,          // Y position (centers items vertically in canvas)
+  startY: 1000,          // Y position (centers items vertically in canvas)
   spacingX: 200,         // Horizontal spacing between items
+  spacingY: 200,         // Vertical spacing between rows
+  maxItemsPerRow: 8,     // Maximum items per row before wrapping
+  maxRowWidth: 10000,     // Maximum width of a row before wrapping
 };
 
 /**
@@ -118,23 +121,92 @@ const baseGalleryItems: Omit<ArchiveItem, 'position'>[] = [
     width: 700,
     height: 500
   },
+  {
+    id: 'procession',
+    type: 'painting',
+    censoredSrc: 'assets/paintings/procession-ai.png',
+    uncensoredSrc: 'assets/paintings/procession.jpg',
+    title: '',
+    description: '',
+    width: 700,
+    height: 500
+  },
+  {
+    id: 'apotheosis',
+    type: 'painting',
+    censoredSrc: 'assets/paintings/apotheosis-ai.png',
+    uncensoredSrc: 'assets/paintings/apotheosis.JPG',
+    title: '',
+    description: '',
+    width: 700,
+    height: 500
+  },
+  {
+    id: 'head',
+    type: 'painting',
+    censoredSrc: 'assets/paintings/head-ai.png',
+    uncensoredSrc: 'assets/paintings/head.jpg',
+    title: '',
+    description: '',
+    width: 500,
+    height: 700
+  },
+  {
+    id: 'abstract',
+    type: 'painting',
+    censoredSrc: 'assets/paintings/abstract-ai.png',
+    uncensoredSrc: 'assets/paintings/abstract.jpg',
+    title: '',
+    description: '',
+    width: 900,
+    height: 600
+  },
+  {
+    id: 'dream',
+    type: 'painting',
+    censoredSrc: 'assets/paintings/dream-ai.png',
+    uncensoredSrc: 'assets/paintings/dream.jpg',
+    title: '',
+    description: '',
+    width: 500,
+    height: 400
+  },
 ];
 
 /**
- * Automatically positions gallery items in a horizontal line
+ * Automatically positions gallery items with wrapping based on row width or item count
  */
 function positionGalleryItems(items: Omit<ArchiveItem, 'position'>[]): ArchiveItem[] {
   let currentX = LAYOUT_CONFIG.startX;
+  let currentY = LAYOUT_CONFIG.startY;
+  let itemsInCurrentRow = 0;
+  let maxHeightInRow = 0;
 
   return items.map((item) => {
     const itemWidth = item.width || 400; // Default width if not specified
+    const itemHeight = item.height || 500; // Default height if not specified
+
+    // Check if we need to wrap to a new row
+    const wouldExceedWidth = currentX + itemWidth > LAYOUT_CONFIG.maxRowWidth;
+    const wouldExceedItemCount = itemsInCurrentRow >= LAYOUT_CONFIG.maxItemsPerRow;
+
+    if (itemsInCurrentRow > 0 && (wouldExceedWidth || wouldExceedItemCount)) {
+      // Start a new row
+      currentX = LAYOUT_CONFIG.startX;
+      currentY += maxHeightInRow + LAYOUT_CONFIG.spacingY;
+      itemsInCurrentRow = 0;
+      maxHeightInRow = 0;
+    }
+
     const position = {
       x: currentX,
-      y: LAYOUT_CONFIG.startY,
+      y: currentY,
     };
 
-    // Move X position for next item (current item width + spacing)
+    // Update tracking variables
     currentX += itemWidth + LAYOUT_CONFIG.spacingX;
+    itemsInCurrentRow++;
+    maxHeightInRow = Math.max(maxHeightInRow, itemHeight);
 
     return {
       ...item,
