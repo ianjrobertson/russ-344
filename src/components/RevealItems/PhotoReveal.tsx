@@ -23,7 +23,7 @@ export default function PhotoReveal({ item, onReveal }: PhotoRevealProps) {
 
   return (
     <div
-      className="absolute cursor-pointer group"
+      className="absolute cursor-pointer group touch-manipulation"
       style={{
         left: `${item.position.x}px`,
         top: `${item.position.y}px`,
@@ -36,7 +36,7 @@ export default function PhotoReveal({ item, onReveal }: PhotoRevealProps) {
     >
       {/* Container with mobile-friendly touch target (minimum 44x44px enforced by padding if needed) */}
       <div
-        className="relative w-full h-full rounded-lg overflow-hidden shadow-2xl border-2 border-slate-700 hover:border-slate-500 transition-colors"
+        className="relative w-full h-full rounded-md md:rounded-lg overflow-hidden shadow-lg md:shadow-2xl border border-slate-600 md:border-2 md:border-slate-700 hover:border-slate-500 active:border-slate-400 transition-colors"
         style={{
           touchAction: 'manipulation', // Prevents double-tap zoom on mobile
           minWidth: '44px',
@@ -65,7 +65,7 @@ export default function PhotoReveal({ item, onReveal }: PhotoRevealProps) {
           transition-opacity duration-300
           bg-gradient-to-t from-black/80 via-transparent to-transparent
         `}>
-          <div className="absolute bottom-2 left-2 right-2 text-white text-sm font-medium">
+          <div className="absolute bottom-1 left-1 right-1 md:bottom-2 md:left-2 md:right-2 text-white text-xs md:text-sm font-medium">
             {!isRevealed ? 'Tap to reveal' : 'Tap to hide'}
           </div>
         </div>
@@ -80,9 +80,9 @@ export default function PhotoReveal({ item, onReveal }: PhotoRevealProps) {
         />
 
         {/* Status indicator - small dot showing if revealed */}
-        <div className="absolute top-2 right-2 pointer-events-none">
+        <div className="absolute top-1 right-1 md:top-2 md:right-2 pointer-events-none">
           <motion.div
-            className={`w-3 h-3 rounded-full ${
+            className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${
               isRevealed ? 'bg-green-400' : 'bg-slate-600'
             }`}
             initial={false}
@@ -98,7 +98,7 @@ export default function PhotoReveal({ item, onReveal }: PhotoRevealProps) {
       <AnimatePresence>
         {isRevealed && item.description && (
           <motion.div
-            className="absolute top-full left-0 mt-2 bg-slate-800/95 text-white p-3 rounded-lg shadow-xl max-w-xs backdrop-blur-sm border border-slate-700"
+            className="absolute top-full left-0 mt-1 md:mt-2 bg-slate-800/95 text-white p-2 md:p-3 rounded-md md:rounded-lg shadow-lg md:shadow-xl max-w-[90vw] md:max-w-xs backdrop-blur-sm border border-slate-700"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -106,10 +106,10 @@ export default function PhotoReveal({ item, onReveal }: PhotoRevealProps) {
             onMouseDown={handleInteraction}
             onTouchStart={handleInteraction}
           >
-            <h3 className="font-bold text-sm mb-1">{item.title}</h3>
-            <p className="text-xs text-slate-300">{item.description}</p>
+            <h3 className="font-bold text-xs md:text-sm mb-1">{item.title}</h3>
+            <p className="text-[10px] md:text-xs text-slate-300 leading-tight md:leading-normal">{item.description}</p>
             {item.historicalContext && (
-              <p className="text-xs text-slate-400 mt-2 italic">
+              <p className="text-[10px] md:text-xs text-slate-400 mt-1 md:mt-2 italic leading-tight md:leading-normal">
                 {item.historicalContext}
               </p>
             )}
