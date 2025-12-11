@@ -122,7 +122,7 @@ export default function ZoomableCanvas({
       </TransformWrapper>
 
       {/* Bottom navigation buttons */}
-      <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center pointer-events-none z-50">
+      <div className="absolute bottom-16 sm:bottom-8 md:bottom-4 left-4 right-4 flex justify-between items-center pointer-events-none z-50">
         {/* Reset button - bottom left */}
         {showResetButton && (
           <button
